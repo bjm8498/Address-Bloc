@@ -17,8 +17,8 @@ class MenuController
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
-        puts "6 - View entry number n"
+        puts "5 - View entry number n"
+        puts "6 - Exit"
         print "Enter your selection: "
         
         selection = gets.to_i
@@ -42,11 +42,13 @@ class MenuController
                 read_csv
                 main_menu
             when 5
+                system "clear"
+                view_entry_number_n
+                main_menu
+            when 6
                 puts "Good-bye!"
             
                 exit(0)
-            when 6
-            
             else
                 system "clear"
                 puts "Sorry, that is not a valid input"
@@ -93,42 +95,63 @@ class MenuController
         def read_csv
         end
             
-            def entry_submenu(entry)
+        def entry_submenu(entry)
                
-                puts "n - next entry"
-                puts "d - delete entry"
-                puts "e - edit this entry"
-                puts "m - return to main menu"
+            puts "n - next entry"
+            puts "d - delete entry"
+            puts "e - edit this entry"
+            puts "m - return to main menu"
                 
-                selection = gets.chomp
+            selection = gets.chomp
                 
-                case selection
+            case selection
                     
-                    when "n"
+                when "n"
                     
-                    when "d"
-                    when "e"
+                when "d"
+                when "e"
                     
-                    when "m"
-                        system "clear"
-                        main_menu
+                when "m"
+                    system "clear"
+                    main_menu
                     else
-                        system "clear"
-                        puts "#{selection} is not a valid input"
-                        entry_submenu(entry)
+                    system "clear"
+                    puts "#{selection} is not a valid input"
+                    entry_submenu(entry)
                 end
-            end
+        end
     
             def view_entry_number_n
                 
-                entry_number = ''
-                puts "Enter the number of the entry you wish to see"
+#                entry_number = nil
+                puts "Enter the number of the entry you wish to see:"
                 
-                address_book.entries.each_with_index do |entry, index|
-                    if (entry_number = entry[index])
-                        puts entry[index]
-                    else
-                        puts "Enter a valid entry number"
+#                address_book.entries.each_with_index do |entry, index|
+#                    if (entry_number == entry[index])
+#                        puts entry[entry_number]
+#                    else
+#                        puts "Enter a valid entry number"
+#                    end
+#                end
+                
+#                case numberSelection
+#                   when 1 
+#                    system "clear"
+#                    puts address_book.entries[0].to_s
+#                else
+#                    puts "Enter a valid number"
+#                    view_entry_number_n
+#                end
+                number_Selection = gets.chomp.to_i
+                if number_Selection < @address_book.entries.count
+                    puts @address_book.entries[number_Selection]
+                    puts "Press enter to return to the main menu"
+                    gets.chomp
+                    system "clear"
+                else
+                    puts "#{number_Selection} in not a valid input"
+                    view_entry_number_n
+                end
             end
         
         
